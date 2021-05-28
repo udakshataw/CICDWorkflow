@@ -1,0 +1,26 @@
+service: serverless
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+custom:
+  stage: dev
+  region: us-east-1
+
+package:
+ exclude:
+   - node_modules/**
+   - .env
+
+functions:
+  hello:
+    handler: handler.hello
+
+resources:
+ Resources:
+   MyS3Buckwewt:
+     Type: AWS::S3::Bucket
+     Properties:
+       BucketName: my-${self:service}-${self:custom.region}-bucket
